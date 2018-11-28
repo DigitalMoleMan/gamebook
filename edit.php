@@ -3,37 +3,71 @@
 ?>
 <!doctype html>
 <html lang="se">
+
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-	<title>Soloäventyr - Redigera</title>
-	<link href="https://fonts.googleapis.com/css?family=Merriweather|Merriweather+Sans" rel="stylesheet"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Soloäventyr - Edit</title>
+	<link href="https://fonts.googleapis.com/css?family=Merriweather|Merriweather+Sans" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	 crossorigin="anonymous">
 </head>
+
 <body>
-<nav id="navbar">
-	<a href="index.php">Hem</a>
-	<a href="play.php?page=1">Spela</a>
-	<a class="active" href="edit.php">Redigera</a>
-</nav>	
-<main class="content">
-	<section>
-		<h1>Redigera</h1>
-		<form action="" method="POST"><br>
-			table
-			<input type="text" name="table"><br>
-			id
-			<input type="text" name="id"><br>
-			text
-			<textarea name="text"></textarea><br>
-			<input type="submit" name="create" value="create">
-            <input type="submit" name="read" value="read">
-            <input type="submit" name="update" value="update">
-            <input type="submit" name="delete" value="delete">
-            <br>
-			<input type="submit" name="readall" value="readall">
-		</form>
-		<?php
+<nav id="navbar" class="navbar navbar-light bg-light">
+			<ul class="nav nav-pills">
+				<li class="nav-item">
+					<a class="nav-link" href="index.php">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="play.php?page=1">Play</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" href="edit.php">Edit</a>
+				</li>
+			</ul>
+		</nav>
+	<main class="content">
+		<section>
+			<h1>Redigera</h1>
+
+			<form action="" method="POST"><br>
+				<div class="container">
+
+					<div class="row">
+						<div class="col-sm">
+							<div class="form-group">
+								<label for="table">Table</label>
+								<input type="text" id="table" class="form-control" name="table"><br>
+							</div>
+							<div class="form-group">
+								<label for="id">ID</label>
+								<input type="text" id="id" class="form-control" name="id"><br>
+							</div>
+							<div class="form-group">
+								<label for="text">Text</label>
+								<textarea name="text" class="form-control" id="text"></textarea><br>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm">
+							<div class="btn-group" role="group" aria-label="Basic example">
+								<input type="submit" class="btn btn-secondary" name="create" value="create">
+								<input type="submit" class="btn btn-secondary" name="read" value="read">
+								<input type="submit" class="btn btn-secondary" name="update" value="update">
+								<input type="submit" class="btn btn-secondary" name="delete" value="delete">
+								<input type="submit" class="btn btn-secondary" name="readall" value="readall">
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+			</form>
+			<?php
 		
 		include_once 'include/dbinfo.php';
 
@@ -125,46 +159,9 @@
 			$stmt->bindParam(':id', $_POST['id']);
 			$stmt->execute();
 		}            
-
-	/*
-		echo "<pre>" . print_r($_POST, 1) . "</pre>";
-
-
-
-		include_once 'include/dbinfo.php';
-		
-		// PDO
-		$dbh = new PDO('mysql:host=localhost;dbname=gamebook;charset=utf8mb4', $dbuser, $dbpass);
-
-		// TODO load requested page from DB using GET
-		// prio before session
-		// set session to remember
-		
-		for($i = 1; $i <= 10; $i++) {
-			$stmt = $dbh->prepare("SELECT * FROM story WHERE id = :id");
-			$stmt->bindParam(':id', $i);
-			$stmt->execute();
-		
-		
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			//echo "<pre class='debug'> filteredPage = " . print_r($filteredPage) . "</pre>";
-			echo "<pre class='debug'>story" . print_r($row,1) . "</pre>"; // echo story data array
-
-			$stmt = $dbh->prepare("SELECT * FROM storylinks WHERE storyid = :id");
-			
-			$stmt->bindParam(':id', $i);
-			$stmt->execute();
-		
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			echo "<pre class='debug'>storylinks" . print_r($row,1) . "</pre>"; // echo story data array
-			
-		}
-		echo "<pre class='debug'>storylinks" . print_r($row,1) . "</pre>";
-		echo "<pre class='debug'> dbh = " . print_r($dbh,1) . "</pre>";
-		echo "<pre class='debug'> stmt = " . print_r($stmt,1) . "</pre>";
-	*/
 		?>
-</main>
-<script src="js/navbar.js"></script>
+	</main>
+	<script src="js/navbar.js"></script>
 </body>
+
 </html>
